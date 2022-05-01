@@ -15,8 +15,7 @@
       <li>updataDessert()//디저트 품목을 수정하는 함수
       <li>SaveDate()//데이터를 파일에 저장하는 함수
       <li>LoadDate()//데이터를 파일에서 로딩하는 함수
-      <li>listConsumer()//소비자가 디저트 품목을 확인하고 
-      <li> 구매를 하는 함수
+      <li>listConsumer()//소비자가 디저트 품목을 확인하고 구매를 하는 함수
       <li>decaffeine()// 소비자가 구매를 할 때 디카페인, 당도 등 자신의 취향을 결정하게
 도와주는 함수
       <li>pointStemp()//소비자에게 스탬프를 찍어, 몇 회 이상 방문하였는지
