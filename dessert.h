@@ -8,6 +8,7 @@ typedef struct{
     int takeout; //takeout여부(1:takeout, 2:매장)
 }Cafe;
 
+int selectMenu(); // 판매자를 선택시 메뉴를 선택하는 함수
 int selectUser(); // 판매자와 구매자를 선택하는 함수
 void createDessert(); //판매자가 디저트 품목을 만드는 함수
 void listDessert(); // 어떤 디저트가 있는 확인할 수 있는 함수
