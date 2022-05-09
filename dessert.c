@@ -122,22 +122,24 @@ int loadProduct(Cafe *p[]){
     char str[200];
     char *prt;
     FILE *fp;
-    if(fp=fopen("dessert.txt","rt")){
-while(fgets(str,200,fp)!=NULL){
-     p[i]=(Cafe *)malloc(sizeof(Cafe));
-     prt=strtok(str,";");
-     strcpy(p[i]->name,prt);
-     prt=strtok(NULL,";");
-     strcpy(p[i]->explain,prt);
-     prt=strtok(NULL,";");
-    p[i]->price=atoi((strtok(NULL,";")));
-    p[i]->point=atoi((strtok(NULL,";")));
-    p[i]->takeout=atoi((strtok(NULL,";")));
-    i++;
-}
-fclose(fp);
-}
-else printf("파일 없음\n"); return i;
+    fp=fopen("dessert.txt","rt");
+        while(fgets(str,200,fp)!=NULL){
+            if(fp==NULL) printf("파일 없음\n"); 
+            else{
+            p[i]=(Cafe *)malloc(sizeof(Cafe));
+            prt=strtok(str,";");
+            strcpy(p[i]->name,prt);
+            prt=strtok(NULL,";");
+            strcpy(p[i]->explain,prt);
+            prt=strtok(NULL,";");
+            p[i]->price=atoi((strtok(NULL,";")));
+            p[i]->point=atoi((strtok(NULL,";")));
+            p[i]->takeout=atoi((strtok(NULL,";")));
+            i++;
+            }
+        }
+    fclose(fp);   
+    return i;
 }//파일 데이터 불러오기
 
 void saveProduct(Cafe *p[], int count){
