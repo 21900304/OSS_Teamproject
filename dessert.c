@@ -37,12 +37,6 @@ int createDessert(Cafe *p)
         printf("음료의 가격  ");
         scanf("%d",&p->price);
 
-        printf("스탬프의 갯수// 도장 개수(10개되면 음료 한잔)  ");
-        scanf("%d",&p->point);
-
-        printf("takeout여부(1:takeout, 2:매장)  ");
-        scanf("%d",&p->takeout);
-
         getchar();
         printf("음료 상세 설명  ");
         fgets(p->explain,100,stdin);
@@ -61,21 +55,19 @@ void listDessert(Cafe *p,int count)
 
         for(int i=0; i<count; i++)
         {
-            if(p->price != -1)
-            {
-                printf("%d.",i+1);
-                readDessert(p[i]);
-            }
-
-                
+            readDessert(p[i],i);
         }
 
 } 
-int readDessert(Cafe p)
+int readDessert(Cafe p, int i)
 {
-    printf("음료명: %s 음료 가격: %d원 스탬프 갯수: %d개 취식방법: %d번\n",p.name,p.price,p.point,p.takeout);
-    printf("음료 설명: %s",p.explain);
-    printf("\n");
+    if(p.price != -1)
+    {
+        printf("%d. ",i+1);
+        printf("음료명: %s 음료 가격: %d원\n",p.name,p.price);
+        printf("음료 설명: %s",p.explain);
+        printf("\n");       
+    }
     return 1;
     
 
@@ -83,31 +75,31 @@ int readDessert(Cafe p)
 int deleteDessert(Cafe *p)
 {
         p->price=-1;
-        p->point=-1;
+        
     
         printf("삭제됨!!\n");
 
         printf("\n");
         return 1;
-
+}
+int selectDateNo(Cafe *s, int count){
+    int no;
+    listDessert(s,count);
+    printf("번호는 (취소 :0)/");
+    scanf("%d",&no);
+    return no;
 }
 int updataDessert(Cafe *p)
 {
-        printf("음료명은 무엇입니까??");
+        printf("음료명은 무엇입니까??  ");
         scanf("%s",p->name);
 
-        getchar();
-        printf("음료 상세 설명");
-        fgets(p->explain,100,stdin);
-
-        printf("음료의 가격");
+        printf("음료의 가격  ");
         scanf("%d",&p->price);
 
-        printf("스탬프의 갯수// 도장 개수(10개되면 음료 한잔)");
-        scanf("%d",&p->point);
-
-        printf("takeout여부(1:takeout, 2:매장)");
-        scanf("%d",&p->takeout);
+        getchar();
+        printf("음료 상세 설명  ");
+        fgets(p->explain,100,stdin);
 
         printf("수정 성공\n");
 
@@ -117,37 +109,34 @@ int updataDessert(Cafe *p)
 
 }
 
-int loadProduct(Cafe *p[]){
+
+int LoadDate(Cafe *p[]){
     int i=0;
     char str[200];
     char *prt;
     FILE *fp;
-    fp=fopen("dessert.txt","rt");
-        while(fgets(str,200,fp)!=NULL){
-            if(fp==NULL) printf("파일 없음\n"); 
-            else{
-            p[i]=(Cafe *)malloc(sizeof(Cafe));
-            prt=strtok(str,";");
-            strcpy(p[i]->name,prt);
-            prt=strtok(NULL,";");
-            strcpy(p[i]->explain,prt);
-            prt=strtok(NULL,";");
-            p[i]->price=atoi((strtok(NULL,";")));
-            p[i]->point=atoi((strtok(NULL,";")));
-            p[i]->takeout=atoi((strtok(NULL,";")));
-            i++;
-            }
-        }
-    fclose(fp);   
-    return i;
+    if(fp=fopen("dessert.txt","rt")){
+while(fgets(str,200,fp)!=NULL){
+     p[i]=(Cafe *)malloc(sizeof(Cafe));
+     prt=strtok(str,";");
+     strcpy(p[i]->name,prt);
+     prt=strtok(NULL,";");
+     strcpy(p[i]->explain,prt);
+     prt=strtok(NULL,";");
+    p[i]->price=atoi((strtok(NULL,";")));
+    i++;
+}
+fclose(fp);
+}
+else printf("파일 없음\n"); return i;
 }//파일 데이터 불러오기
 
-void saveProduct(Cafe *p[], int count){
+void SaveDate(Cafe *p[], int count){
     FILE *fp;
     fp=fopen("dessert.txt","wt");
     for(int i=0;i<count;i++){
-fprintf(fp,"%s; %s; %d; %d; %d;\n",p[i]->name,p[i]- >explain,p[i]->price,p[i]->point,p[i]->takeout);
+fprintf(fp,"%s; %s; %d; %d; %d;\n",p[i]->name,p[i]->explain,p[i]->price);
     }
     fclose(fp);
 printf("저장 됨!\n");
-}//데이터 저장하기
+}//데이터 저장하기 
