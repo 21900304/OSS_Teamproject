@@ -20,7 +20,6 @@ void listDessert(Cafe *p[],int index); // 어떤 디저트가 있는 확인할 �
 int readDessert(Cafe p, int i); // 디저트품목을 읽어오는 함수
 int deleteDessert(Cafe *p); //디저트 품목을 삭제하는 함수
 int selectDateNo(Cafe *s[], int index); // 사용자가 디저트 품목을 삭제하고 싶을 때 몇 번째 데이터를 삭제하는 확인하는 함수
-int updataDessert(Cafe *p); //디저트 품목을 수정하는 함수
 void SaveDate(Cafe *p[], int count); //데이터를 파일에 저장하는 함수
 int LoadDate(Cafe *p[]); //데이터를 파일에서 로딩하는 함수
 //남은 함수들
