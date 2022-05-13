@@ -82,25 +82,6 @@ int selectDateNo(Cafe *s[], int index){
     return no;
 }
 
-int updataDessert(Cafe *p){
-        printf("음료명은 무엇입니까??  ");
-        scanf("%s",p->name);
-
-        printf("음료의 가격  ");
-        scanf("%d",&p->price);
-
-        getchar();
-        printf("음료 상세 설명  ");
-        fgets(p->explain,100,stdin);
-
-        printf("수정 성공\n");
-
-        printf("\n");
-        return 1;
-
-
-}
-
 int LoadDate(Cafe *p[]){
     int count=0;
     char str[200];
