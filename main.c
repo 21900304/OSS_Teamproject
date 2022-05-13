@@ -39,8 +39,26 @@ int main(void){
                  	else if(menu == 5) SaveDate(menu_list,index);
                   }//while
 	}//user==1
+    User *user_info[100]; //손님 정보
+    int count_user=0; //포인트 적립에 등록된 손님 수
+    count_user=User_LoadDate(user_info);
                 if(user == 2){//구매자일 때
-			return 0;
+		  while(1){
+                    menu = selectMenu_User();
+                    if(menu == 0) break;
+                    else if(menu == 1) {
+                        listDessert(menu_list,index);
+                    }
+                    else if(menu == 2){ //음료 구매->소비자 취향 선택->테이크아웃여부
+
+                        int check=takeOut(); //1번이면 매장, 2번이면 takeout
+                        //구현해주세요!
+                    }
+                    else if(menu == 3){ //도장 적립
+                        count_user=pointStemp(user_info,count_user);//이름 넘겨주고 도장 추가
+                        User_SaveDate(user_info,count_user);//바로 저장
+                    } 
+                }
                 }
         printf("종료됨");
         return 0;
