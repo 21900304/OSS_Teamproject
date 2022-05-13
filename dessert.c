@@ -141,8 +141,9 @@ void SaveDate(Cafe *p[], int count){
     FILE *fp;
     fp=fopen("dessert.txt","wt");
     for(int i=0;i<count;i++){
-fprintf(fp,"%s; %s; %d; %d; %d;\n",p[i]->name,p[i]->explain,p[i]->price);
+        if(p[i]->price==-1) continue;
+        fprintf(fp,"%s %d %s\n",p[i]->name,p[i]->price,p[i]->explain);
     }
     fclose(fp);
-printf("저장 됨!\n");
+    printf("저장 됨!\n");
 }//데이터 저장하기 
