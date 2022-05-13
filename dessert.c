@@ -1,8 +1,6 @@
 #include "dessert.h"
-#include <string.h>
-#include <stdlib.h>
-int selectUser()
-{
+
+int selectUser(){
     int user;
     printf("\n  <<<<<판매자 및 구매자 음료 등록 서비스 >>>>>\n");
     printf("당신은 어떤 서비스를 원합니까?\n");
@@ -12,8 +10,8 @@ int selectUser()
     scanf("%d",&user);
     return user;
 }
-int selectMenu()
-{
+
+int selectMenu(){
         int menu;
         printf("\n *** 판매자 음료 등록 서비스 ***\n");
         printf("0. 종료\n");
@@ -22,75 +20,69 @@ int selectMenu()
         printf("3. 음료 리스트 수정\n");
         printf("4. 음료 리스트 삭제\n");
         printf("5. 음료 리스트 데이터 저장\n");
-        printf("6. 음료 리스트 데이터로딩\n");
         printf("=> 원하는 메뉴는?\n");
         scanf("%d",&menu);
 
         return menu;
 }
 
-int createDessert(Cafe *p)
-{
+int createDessert(Cafe *p){
         printf("음료명은 무엇입니까??  ");
         scanf("%s",p->name);
 
         printf("음료의 가격  ");
         scanf("%d",&p->price);
-
         getchar();
+
         printf("음료 상세 설명  ");
         fgets(p->explain,100,stdin);
+	p->explain[strlen(p->explain)-1]='\0';
 
-        printf("\n");
         return 1;
-
 } 
-void listDessert(Cafe *p,int count)
-{
+
+void listDessert(Cafe *p[],int index){
         printf("\n");
         printf("\n");
         printf("-------------------------\n");
         printf(" <<<음료 목록>>>\n");
         printf("-------------------------\n");
 
-        for(int i=0; i<count; i++)
+        for(int i=0; i<index; i++)
         {
-            readDessert(p[i],i);
+            readDessert(*p[i],i);
         }
 
 } 
-int readDessert(Cafe p, int i)
-{
-    if(p.price != -1)
+
+int readDessert(Cafe p, int i){
+    if(p.price > 0)
     {
-        printf("%d. ",i+1);
+        printf("%2d. ",i+1);
         printf("음료명: %s 음료 가격: %d원\n",p.name,p.price);
         printf("음료 설명: %s",p.explain);
         printf("\n");       
     }
     return 1;
-    
+}//하나의 제품 출력
 
-}
 int deleteDessert(Cafe *p)
 {
         p->price=-1;
-        
-    
         printf("삭제됨!!\n");
-
         printf("\n");
         return 1;
 }
-int selectDateNo(Cafe *s, int count){
+
+int selectDateNo(Cafe *s[], int index){
     int no;
-    listDessert(s,count);
-    printf("번호는 (취소 :0)/");
+    listDessert(s,index);
+    printf("번호는 (취소 :0)? ");
     scanf("%d",&no);
     return no;
 }
-int updataDessert(Cafe *p)
-{
+
+int updataDessert(Cafe *p){
         printf("음료명은 무엇입니까??  ");
         scanf("%s",p->name);
 
