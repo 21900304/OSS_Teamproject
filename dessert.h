@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 typedef struct{
     char name[50]; //제품 이름
