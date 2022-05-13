@@ -109,26 +109,32 @@ int updataDessert(Cafe *p)
 
 }
 
-
 int LoadDate(Cafe *p[]){
-    int i=0;
+    int count=0;
     char str[200];
     char *prt;
+    int ptr;
     FILE *fp;
-    if(fp=fopen("dessert.txt","rt")){
-while(fgets(str,200,fp)!=NULL){
-     p[i]=(Cafe *)malloc(sizeof(Cafe));
-     prt=strtok(str,";");
-     strcpy(p[i]->name,prt);
-     prt=strtok(NULL,";");
-     strcpy(p[i]->explain,prt);
-     prt=strtok(NULL,";");
-    p[i]->price=atoi((strtok(NULL,";")));
-    i++;
+    fp=fopen("dessert.txt","rt");
+    if(fp==NULL){
+        printf("음료 파일 없음\n");
+        return 0;
+    }
+    else{
+        if(!feof(fp)){
+            for(int i=0;i<50;i++){
+                if(feof(fp))break;
+                p[i]=(Cafe *)malloc(sizeof(Cafe));
+                fscanf(fp,"%s",p[i]->name);
+                fscanf(fp,"%d",&p[i]->price);
+                fgets(p[i]->explain,100,fp);
+                if(p[i]->price>0) count++;
+            }
+        }
+    fclose(fp);
+    printf("로딩 완료!\n");
+    return count;
 }
-fclose(fp);
-}
-else printf("파일 없음\n"); return i;
 }//파일 데이터 불러오기
 
 void SaveDate(Cafe *p[], int count){
