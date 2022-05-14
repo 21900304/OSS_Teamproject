@@ -13,6 +13,8 @@
 <h4>deletedessert</h4>
 <img width="311" alt="deletedessert" src="https://user-images.githubusercontent.com/103620720/168419589-f180d7c1-e010-47ed-b51e-bb60274b6371.png">
 <br>
+<img width="339" alt="딜리트 디저트함수와 업데이트 함수가 잘 돌아가는 확인한 리스트 함수!" src="https://user-images.githubusercontent.com/103620720/168419948-bc818727-0334-4f42-94e1-1ed6fb5ac657.png">
+<br>
 <h4>createdessert</h4>
 <img width="308" alt="adddessert" src="https://user-images.githubusercontent.com/103620720/168419644-cbacfb32-aaaf-4a95-a51a-4b966470974a.png">
 <br>
