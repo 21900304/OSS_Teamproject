@@ -229,13 +229,13 @@ void decaffeine()
     int decaff; // 음료의 카페인 함량을 입력 받는 변수
     printf("ice로 드릴까요 hot으로 드릴까요? / 1: ice, 2: hot\n");
     scanf("%d",&ice);
-    printf("당도는 어떻게 드릴까요? / ex:0%, 50%, 100%/ 숫자만 입력하세요!\n");
+    printf("당도는 어떻게 드릴까요? / ex:0 50 100/ 숫자만 입력하세요!\n");
     scanf("%d",&sugar);
     printf("카페인 함량은 어떻게 드릴까요?/ ex:0:디카페인, 1: 카페인, 2: 2 shot\n");
     scanf("%d",&decaff);
 
     printf("(1: ice, 2: hot) 음료 온도-> %d\n",ice);
-    printf("음료 당도-> %d\n%",sugar);
+    printf("음료 당도-> %d\n",sugar);
     printf("(0:디카페인, 1: 카페인, 2: 2 shot)  카페인-> %d\n",decaff);
 
 }
