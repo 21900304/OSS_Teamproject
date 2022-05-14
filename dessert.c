@@ -4,6 +4,7 @@ int selectUser(){
     int user;
     printf("\n  <<<<<판매자 및 구매자 음료 등록 서비스 >>>>>\n");
     printf("당신은 어떤 서비스를 원합니까?\n");
+    printf("0. 종료\n");
     printf("1. 판매자\n");
     printf("2. 구매자\n");
     printf("=> 원하는 메뉴는?\n");
@@ -36,10 +37,10 @@ int createDessert(Cafe *p){
 
         printf("음료 상세 설명  ");
         fgets(p->explain,100,stdin);
-	p->explain[strlen(p->explain)-1]='\0';
+        p->explain[strlen(p->explain)-1]='\0';
 
         return 1;
-} 
+}
 
 void listDessert(Cafe *p[],int index){
         printf("\n");
@@ -53,7 +54,7 @@ void listDessert(Cafe *p[],int index){
             readDessert(*p[i],i);
         }
 
-} 
+}
 
 int readDessert(Cafe p, int i){
     if(p.price > 0)
@@ -61,7 +62,7 @@ int readDessert(Cafe p, int i){
         printf("%2d. ",i+1);
         printf("음료명: %s 음료 가격: %d원\n",p.name,p.price);
         printf("음료 설명: %s",p.explain);
-        printf("\n");       
+        printf("\n");
     }
     return 1;
 }//하나의 제품 출력
@@ -123,18 +124,6 @@ void SaveDate(Cafe *p[], int count){
 
 
 //------이번에 구현한 user버전 함수--------
-int selectMenu_User(){
-        int menu;
-        printf("\n *** 구매자 음료 구매 서비스 ***\n");
-        printf("0. 종료\n");
-        printf("1. 음료 리스트 확인\n");
-        printf("2. 음료 구매\n"); //소비자 취향 선택 여기서 이어지도록 구현
-        printf("3. 도장 적립\n"); //자동으로 저장되도록 구현
-        printf("=> 원하는 메뉴는?\n");
-        scanf("%d",&menu);
-
-        return menu;
-}
 
 int pointStemp(User *p[], int count){
     char user_name[10];
@@ -147,7 +136,7 @@ int pointStemp(User *p[], int count){
         count++;
         strcpy(p[0]->username,user_name);
         p[0]->stamp=1;
-        printf("%s님 도장이 하나 적립되었습니다. 현재 도장 개수는 %d개 입니다.\n",p[0]->username,p[0]->stamp); 
+        printf("%s님 도장이 하나 적립되었습니다. 현재 도장 개수는 %d개 입니다.\n",p[0]->username,p[0]->stamp);
         return count;
     }
     else if(!feof(fp)){
@@ -170,13 +159,86 @@ int pointStemp(User *p[], int count){
             printf("count: %d\n",count);//
             strcpy(p[count-1]->username,user_name);
             p[count-1]->stamp=1;
-            printf("%s님 도장이 하나 적립되었습니다. 현재 도장 개수는 %d개 입니다.\n",p[count-1]->username,p[count-1]->stamp); 
+            printf("%s님 도장이 하나 적립되었습니다. 현재 도장 개수는 %d개 입니다.\n",p[count-1]->username,p[count-1]->stamp);
         }
     }
     fclose(fp);
 return count;//사람 수
 }//소비자에게 스탬프를 찍어, 몇 회 이상 방문하였는지 확인할 수 있는 함수
 
+//---------------------------------------소비자 함수들--------------------------------------------------------------//
+
+int User_selectMenu()
+{
+    int menu;
+    printf("\n *** 구매자 음료 메뉴 서비스 ***\n");
+    printf("0. 종료\n");
+    printf("1. 음료 리스트 확인\n");//소비자 취향 선택 여기서 이어지도록 구현
+    printf("2. 도장 적립\n"); //자동으로 저장되도록 구현
+    printf("=> 원하는 메뉴는?\n");
+    scanf("%d",&menu);
+
+        return menu;
+}
+void listConsumer(Cafe *p[],int index)
+{
+    int num; //구매자가 몇 번 음료를 원하는지 입력받는 변수
+    int cup; // 음료를 몇 잔 원하는지 입력받는 변수
+    int total=0; // 가격의 총 합
+    
+    printf("\n");
+    printf("\n");
+    printf("-------------------------\n");
+    printf(" <<<음료 목록>>>\n");
+    printf("-------------------------\n");
+
+    for(int i=0; i<index; i++)
+    {
+        readDessert(*p[i],i);
+    }
+    printf("\n");
+    printf("\n");
+    printf("-------------------------\n");
+    printf(" <<<구매 서비스>>>\n");
+    printf("-------------------------\n");
+    printf("\n");
+    printf("\n");
+    printf("드시고 싶은 음료의 번호는 몇 번인가요??\n");
+    scanf("%d",&num);
+    printf("%d번 음료는 몇 잔 드릴까요??\n",num);
+    scanf("%d",&cup);
+    decaffeine(); // 고객의 취향을 입력할 수 있는 함수
+    pricecheck(*p[num-1],cup);
+
+    
+
+}
+void pricecheck(Cafe p,int cup)
+{
+   
+    int total=0;
+    
+    total= p.price*cup;
+    printf("총 가격은 %d 입니다!\n",total);
+}
+
+void decaffeine()
+{
+    int ice; // 음료의 온도를 입력 받는 변수
+    int sugar; // 음료의 당도를 입력 받는 변수
+    int decaff; // 음료의 카페인 함량을 입력 받는 변수
+    printf("ice로 드릴까요 hot으로 드릴까요? / 1: ice, 2: hot\n");
+    scanf("%d",&ice);
+    printf("당도는 어떻게 드릴까요? / ex:0%, 50%, 100%/ 숫자만 입력하세요!\n");
+    scanf("%d",&sugar);
+    printf("카페인 함량은 어떻게 드릴까요?/ ex:0:디카페인, 1: 카페인, 2: 2 shot\n");
+    scanf("%d",&decaff);
+
+    printf("(1: ice, 2: hot) 음료 온도-> %d\n",ice);
+    printf("음료 당도-> %d\n%",sugar);
+    printf("(0:디카페인, 1: 카페인, 2: 2 shot)  카페인-> %d\n",decaff);
+
+}
 int User_LoadDate(User *p[]){
     int count=0;
     char str[200];
@@ -223,3 +285,4 @@ int takeOut(){
     else if(takeout==2){return 2;}//포장
     return 0; //오류
 } // 소비자가 매장 내에서 음료를 마실지, 포장할 지 정해주는 함수
+

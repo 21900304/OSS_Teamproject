@@ -25,10 +25,11 @@ int LoadDate(Cafe *p[]); //데이터를 파일에서 로딩하는 함수
 //남은 함수들
 //listConsumer()함수에서 선택한 음료와 매장or포장 여부 마지막에 출력해주면 좋을 것 같아요!
 //listConsumer안에서 takeOut()함수 호출해주세요!
-void listConsumer();//소비자가 디저트 품목을 확인하고 구매를 하는 함수
-void decaffeine();// 소비자가 구매를 할 때 디카페인, 당도 등 자신의 취향을 결정하게 도와주는 함수
 
-//-----이미 구현----
+int User_selectMenu();//소비자가 어떤 메뉴를 선택하는 함수.
+void listConsumer(Cafe *p[],int index);//소비자가 디저트 품목을 확인하고 구매를 하는 함수
+void decaffeine();// 소비자가 구매를 할 때 디카페인, 당도 등 자신의 취향을 결정하게 도와주는 함수
+void pricecheck(Cafe p,int cup); //가격의 총합을 보여주는 함수
 int User_LoadDate(User *p[]); //소비자 정보 파일 로드 함수
 void User_SaveDate(User *p[], int count); //소비자 정보 파일 저장 함수
 int pointStemp(User *p[], int count); //소비자에게 스탬프를 찍어, 몇 회 이상 방문하였는지 확인할 수 있는 함수
